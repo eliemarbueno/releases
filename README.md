@@ -99,7 +99,7 @@ O EB QueryBuilder (anteriormente PD SQL Builder) é um **construtor visual de co
 
 Baixe o executável da versão mais recente e execute diretamente — sem necessidade de instalar Python ou dependências.
   - [Versão para Linux](https://github.com/eliemarbueno/releases/releases/download/Latest/EbQueryBuilderFull_Linux.zip)
-  - [Versão para Windows](https://github.com/eliemarbueno/releases/releases/download/Latest/EbQueryBuilderFull_Linux.zip)
+  - [Versão para Windows](https://github.com/eliemarbueno/releases/releases/download/Latest/EbQueryBuilderFull_Windows.zip)
 ---
 
 ## 6. Configuração
