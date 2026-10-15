@@ -23,7 +23,8 @@
    - [7.5 Importar SQL Existente](#75-importar-sql-existente)
    - [7.6 Dialetos SQL Suportados](#76-dialetos-sql-suportados)
 8. [Funcionalidades Detalhadas](#8-funcionalidades-detalhadas)
-9. [Contribuição e Apoio](#12-contribuição-e-apoio)
+9. [Agrupamento, Agregações e HAVING](#9-agrupamento-agregações-e-having)
+10. [Contribuição e Apoio](#10-contribuição-e-apoio)
 
 ---
 
@@ -67,11 +68,13 @@ O EB QueryBuilder (anteriormente PD SQL Builder) é um **construtor visual de co
 | **Batch prefixo/sufixo** | Aplica prefixo/sufixo em várias colunas de uma vez |
 | **Reordenação de colunas** | Move colunas para cima/baixo no SELECT |
 | **Colunas duplicadas** | Mesma coluna pode aparecer múltiplas vezes com sufixos `_2`, `_3` |
-| **Construtor WHERE** | Condições com operadores `=`, `IN`, `LIKE` e lógica `AND`/`OR` |
-| **Importar SQL** | Cole um SQL existente para popular as abas automaticamente |
+| **Construtor WHERE** | Condições com operadores de comparação básicos e lógica `AND`/`OR`; expressões raw disponíveis para critérios complexos |
+| **Importar SQL** | Cole um SQL existente para popular as abas; expressões com funções no SELECT são importadas como raw, preservando aliases em consultas com JOIN explícito |
 | **Copiar SQL** | Um clique para copiar o SQL gerado para a área de transferência |
 | **Configuração de exibição** | Mostrar/ocultar nome conceitual, código físico e alias nas listas |
 | **Tela de abertura (Splash)** | Apresentação inicial com informações do aplicativo |
+| **Funções de agregação** | Atalhos para `COUNT`, `SUM`, `AVG`, `MIN` e `MAX`; o `GROUP BY` é derivado das colunas não agregadas |
+| **Cláusula HAVING** | Construtor visual para filtrar agregações, com operadores e conectores `AND`/`OR` |
 | **Feedback e Apoio** | Diálogo com QR Code PIX para contribuições voluntárias |
 
 ---
@@ -186,7 +189,7 @@ Sistema Legado  = C:\Modelos\legado.pdm     | sqlserver
 5. Escolha o **conectivo lógico**: `AND` ou `OR` (para o próximo critério)
 6. Clique **"Adicionar critério"**
 
-Os critérios aparecem na lista abaixo e podem ser removidos individualmente.
+Os critérios aparecem na lista abaixo e podem ser removidos individualmente. Funções e expressões mais complexas podem ser inseridas como expressão raw. Operadores dedicados como `BETWEEN`, `NOT IN` e `IS NULL` não devem ser presumidos como disponíveis no construtor visual.
 
 ### 7.5 Importar SQL Existente
 
@@ -200,6 +203,8 @@ Se você já tem um SQL pronto e quer editá-lo visualmente:
    - **Aba Campos** → colunas do SELECT
    - **Aba WHERE** → condições de filtro
 5. Se já existir uma consulta em andamento, você pode **Substituir** ou **Mesclar**
+
+Expressões funcionais nas colunas do `SELECT` são mantidas como raw. Em consultas com `JOIN` explícito, os aliases SQL explícitos também são preservados. A importação de funções em condições `WHERE` e de JOINs implícitos (`FROM t1, t2 WHERE ...`) permanece como pendência nas anotações de desenvolvimento.
 
 > Itens importados são marcados com `📥` para fácil identificação.
 
@@ -251,7 +256,15 @@ O importador de SQL:
 
 ---
 
-## 9. Contribuição e Apoio
+## 9. Agrupamento, Agregações e HAVING
+
+A seleção de colunas permite configurar funções de agregação (`COUNT`, `SUM`, `AVG`, `MIN` e `MAX`). Quando uma consulta combina colunas agregadas e não agregadas, o `GROUP BY` é gerado a partir das colunas não agregadas selecionadas; `COUNT(*)` também participa da ativação da lógica de agrupamento.
+
+A aba **HAVING** disponibiliza as agregações presentes no `SELECT` para montar condições sobre os resultados agregados. É possível adicionar/remover comparações, escolher operadores e combinar condições com `AND`/`OR`. A cláusula é gerada após o `GROUP BY`.
+
+---
+
+## 10. Contribuição e Apoio
 
 ### 💡 Contribua com Ideias
 
@@ -273,4 +286,4 @@ Você pode escanear o QR Code diretamente no aplicativo através do botão **"Fe
 
 ---
 
-*Documentação gerada em julho de 2026 • EB QueryBuilder v2.0*
+*Documentação revisada em outubro de 2026 • EB QueryBuilder v2.0*
