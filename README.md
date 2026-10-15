@@ -1,6 +1,6 @@
 # 📘 EB QueryBuilder — Manual do Usuário
 
-**Versão 2.0**  
+**Versão 2.2.*  
 **Desenvolvedor:** [Eliemar Bueno](https://br.linkedin.com/in/eliemar-bueno)  
 **Tecnologia:** Python + PySide6 (Qt)  
 **Licença:** Gratuito para uso pessoal e profissional
